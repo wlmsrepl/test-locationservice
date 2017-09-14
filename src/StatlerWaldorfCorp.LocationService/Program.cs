@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -9,17 +10,22 @@ namespace StatlerWaldorfCorp.LocationService
     {
         public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                .AddCommandLine(args)
-                .Build();
+            Startup.Args = args;
+            BuildWebHost(args).Run();
+        }
 
-            var host = new WebHostBuilder()
-                .UseKestrel()
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            IConfiguration config = new ConfigurationBuilder()
+                            .AddCommandLine(args)
+                            .Build();
+
+            return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseKestrel()
                 .UseConfiguration(config)
                 .Build();
-
-            host.Run();
         }
+
     }
 }
