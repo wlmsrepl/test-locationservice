@@ -26,7 +26,7 @@ $ dotnet nuget push bin\Release\StatlerWaldorfCorp.LocationService.<version>.nup
 ```sh
 $ psql -U postgres
 postgres=# CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-postgres=#
+postgres=# \q
 $ createuser -U postgres --pwprompt --encrypted --no-createrole --no-createdb integrator
 $ createdb -U postgres --owner integrator --encoding UTF8 --lc-ctype C --lc-collate C --template template0 locationservice
 ```
